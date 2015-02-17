@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8">
+   <title>Show Page</title>
+ </head>
+ <body>
+   <h1>Single Student Show Page</h1>
+
+  <h3>Name: <%= @students["name"] %></h3>
+  <h4>Age: <%= @students["age"] %> </h4>
+  <h4>Spirit Animal: <%= @students["spirit_animal"] %></h4>
+
+     <a href="/squads/<%= params[:squads_id] %>/edit">Edit</a>
+
+     <a href="/squads/<%= params[:squads_id] %>/students">Show Students</a>
+   </p>
+ </body>
+ </html> 

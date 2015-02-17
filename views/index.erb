@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WDI student/squad Page</title>
+</head>
+<body>
+  <h1>Home Page!</h1>
+
+  <% @squads.each do |squad| %>
+  <h3><%= squad["name"] %>: </h2><p><a href="/squads/<%= squad["squads_id"] %>">Show</a></p>
+  <% end %>
+<br>
+  <a href="/squads/new">Add a squad!</a>
+
+
+</body>
+</html>

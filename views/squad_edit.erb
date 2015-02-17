@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit a Squad</title>
+</head>
+<body>
+  <h1>Edit squad:</h1>
+
+<form action="/squads/<%= @squad["squads_id"] %>" method="POST">
+  <input type="hidden" name="_method" value="PUT">
+  <label for="name">Squad Name: </label>
+  <input type="text" name="name" autofocus>
+
+  <label for="mascot">Mascot Type: </label>
+  <input type="text" name="mascot">
+
+  <input type="submit" value="Update Squad">
+</form>
+
+<form action="/squad/<%= @squad["squads_id"] %>" method="POST">
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Remove Squad">
+  
+</form>
+
+</body>
+</html>

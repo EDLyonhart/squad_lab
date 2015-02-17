@@ -1,0 +1,64 @@
+
+http://postgresapp.com/documentation/cli-tools.html
+
+INSERT	: to insert, or create, information
+SELECT	: display
+UPDATE	: change
+DELETE	: delete
+
+
+
+CREATE DATABASE learnsql;
+\c learnsql
+CREATE TABLE students(id SERIAL PRIMARY KEY, name VARCHAR(50), age INTEGER)	: separate rows by ‘,’s.
+		: ‘serial’ is like ID except auto increments. 
+		: ’primary key’ is like the ‘header’ in another table; extra importance.
+		: name VARCHAR(50) creates a row which accepts a string of up to 50 characters. strings ALWAYS goes into single quotes ‘Eli’
+		: age INTEGER creates a row which accepts integers.
+
+INSERT INTO students (name, age) VALUES(‘Eli’, 28);	: inserts ‘eli’ and ’28’ into the ‘name’ and ‘age’ columns.
+
+SELECT * FROM students;		: ‘*’ indicates ‘all’ could also use ‘name’ or ‘age’, or chain as ‘name,age’ (all without ’’s)
+	or
+SELECT * FROM students WHERE name=‘Eli’;	: selects all information associated with name=‘Eli’
+						: could also be id=1
+
+UPDATE students SET name=‘Tom’ WHERE name=‘Eli’;
+
+SELECT * FROM students ORDER BY id ASC (or DESC);	: to show all students ordered by ids in ascending (or descending) order
+
+DELETE FROM students WHERE id=2;			: does what you think.
+SELECT * FROM students WHERE name LIKE ‘E%’;		: selects all items where name starts with an ‘E’(case sensitive). ‘%e’ would select name ending in ‘e’
+
+SELECT * FROM students WHERE name=‘Elie’ OR name=‘Eli’;	: what you think.
+SELECT * FROM students WHERE name IN (‘Bob’,’Eli’);	: same as above.
+SELECT * FROM students WHERE name NOT IN (‘Bob’,’Eli’);
+
+
+SELECT COUNT(*) FROM students 				: shows how many items there are in the students list.
+
+SELECT * FROM students LIMIT 1 (or 3);			: shows the first 1 (or 3) items on the table.
+SELECT * FROM students LIMIT 3 OFFSET 1;		: shows the 2, 3, 4 items (three items disregarding the first item).
+
+SELECT * FROM students ORDER BY age ASC LIMIT 3;	: shows the three students with the lowest age.
+		: can chain commands together
+
+SELECT MAX(age) FROM students;
+
+
+
+————————relational tables——————————
+
+one-to-many	: Authors and Books. A book can only be written by one author, but an author can write many books.
+many to many	: something else god-aweful and scary sounding in its complexity.
+
+CREATE TABLE . . .  name VARCHA(50) NOT NULL);			: NOT NULL must have something inserted. 
+	ALTER TABLE books ADD COLUMN author_id INTEGER;		: will add the column ‘author_id”
+
+
+ALTER TABLE books ADD CONSTRAINT author_fk FOREIGN KEY (author_id) REFERENCES authors(id) ON DELETE NO ACTION;
+	fk : FOREIGN KEY
+	: links two values (book’s ‘author_id’ and author’s ‘id’) and doesn’t allow deletion for parents which have children. (authors who have books)
+		: this is nice because it makes it harder to accidentally delete things you don’t intend to.
+
+
